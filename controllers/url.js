@@ -2,22 +2,18 @@ const URL = require("../models/url");
 const shortid = require("shortid");
 
 async function handleGetNewShortId(req, res) {
-  console.log(req.body);
   const body = req.body;
   if (!body.url) {
     return res.render("error");
   }
   const shortID = shortid();
-  const object = await URL.create({
+  await URL.create({
     shortId: shortID,
     redirectUrl: body.url,
     visitHistory: [],
-    createdBy:req.user._id,
+    createdBy: req.user._id,
   });
-  console.log(object);
-  return res.render("home", {
-    object,
-  });
+  return res.redirect("/");
 }
 
 async function handleRedirectOnOriginalUrl(req, res) {
@@ -32,23 +28,33 @@ async function handleRedirectOnOriginalUrl(req, res) {
       },
     },
   );
+  if (!entry) {
+    return res.render("error");
+  }
   res.redirect(entry.redirectUrl);
-} 
+}
 
 
 async function handleServerSideRendering(req, res) {
-  const shortID = req.query.shortID;
+  if (!req.user || !req.user._id) {
+    return res.redirect("/login");
+  }
 
+  const shortID = req.query.shortID;
   let object = null;
 
   if (shortID) {
+    // Only allow viewing URLs that belong to the logged-in user
     object = await URL.findOne({
       shortId: shortID,
+      createdBy: req.user._id,
     });
   }
 
+  const allURLs = await URL.find({ createdBy: req.user._id });
   return res.render("home", {
     object,
+    urls: allURLs,
   });
 }
 module.exports = {
