@@ -1,0 +1,77 @@
+
+// async function handleGetAllUsers(req, res) {
+//   const allUsers = await User.find({});
+//   return res.json({ allUsers });
+// }
+
+// async function handleGetUserById(req, res) {
+//   const user = await User.findById(req.params.id);
+//   if (!user) {
+//     return res.status(404).send({ Status: `User with ID:${id} not found` });
+//   }
+//   return res.json(user);
+// }
+
+// async function handlePostUser(req, res) {
+//   try {
+//     const body = req.body;
+//     if (
+//       !body ||
+//       !body.name ||
+//       !body.email ||
+//       !body.gender ||
+//       !body.password
+//     ) {
+//       return res.status(400).json({ msg: "All fields are required" });
+//     }
+//     const object = await User.create({
+//       name : body.name,
+//       email: body.email,
+//       gender: body.gender,
+//       password: body.password,
+//     });
+//     return res.status(201).json({ msg: "Success", id: object._id });
+//   } catch (err) {
+//     if (err.code === 11000) {
+//       return res.status(409).json({
+//         msg: "Email already exists",
+//       });
+//     }
+//     return res.status(500).json({
+//       msg: "Server Error",
+//       error: err.message,
+//     });
+//   }
+// }
+
+// async function handleUpdateUserById(req, res) {
+//   //update only required details if a perticular user using ID
+//   await User.findByIdAndUpdate(req.params.id, { name: "Changed" });
+//   return res.json({ msg: "Success" });
+// }
+
+// async function handleDeleteUserById(req, res) {
+//   //delete a user with a particular ID
+//   await User.findByIdAndDelete(req.params.id);
+//   return res.json({ msg: "Delete successful" });
+// }
+
+// async function handleUserPutById(req, res) {
+//   //replace the details of an old user with the deatils of a new user with the same ID
+//   const id = req.params.id;
+//   const userIndex = users.findIndex((user) => String(user.id) === id);
+//   if (userIndex === -1) {
+//     return res.status(404).send({ Status: `User with ID:${id} not found` });
+//   }
+//   const UpdatedUser = { id: users[userIndex].id, ...req.body };
+//   users[userIndex] = UpdatedUser;
+
+//   fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
+//     if (err) {
+//       return res.status(500).send({ Status: "Error writing to the file" });
+//     }
+//     return res.json({
+//       status: `user with the ID:${id} replaced successfully`,
+//     });
+//   });
+// }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/output.css">
+    <title>Login</title>
+</head>
+
+<body class="font-mono bg-taupe-950 flex flex-col items-center text-mauve-400">
+
+    <% if (typeof error !=='undefined' ) { %>
+        <div id="notification"
+            class="fixed top-5 right-5 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 ">
+            <%= error %>
+        </div>
+        <script>
+            setTimeout(() => {
+                const notification = document.getElementById("notification");
+                if (notification) {
+                    notification.style.transition = "opacity 0.5s 0.5s";
+                    notification.style.opacity = "0";
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 3000);
+        </script>
+        <% } %>
+
+            <div class="text-xl p-4 justify-center h-screen w-full flex flex-col gap-4 items-center ">
+
+                <form class="flex flex-col gap-4 items-center" method="POST" action="/users/login">
+                    <div class="flex">
+                        <div>Email:</div>
+                        <input class="border-mauve-400 border rounded-sm px-2" type="text" name="email"
+                            placeholder="johndoe123@gmail.com">
+                    </div>
+                    <div class="flex">
+                        <div>Password:</div>
+                        <input class="border-mauve-400 border rounded-sm px-2" type="text" name="password">
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                            class="border px-2 rounded-md hover:cursor-pointer bg-taupe-800">Login</button>
+                    </div>
+                </form>
+            </div>
+
+
+</body>
+
+</html>

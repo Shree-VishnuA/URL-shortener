@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/output.css">
+    <title>Error – URL Shortener</title>
+</head>
+
+<body class="font-mono bg-taupe-950 flex flex-col items-center text-mauve-400 min-h-screen">
+    <nav class="flex flex-row justify-between h-fit items-center border-dashed border-b w-full">
+        <div class="text-5xl font-extrabold p-3">URL shortener</div>
+        <div class="px-4">Profile</div>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center flex-1 gap-4 text-center px-4">
+        <div class="text-9xl font-extrabold opacity-20 tracking-tighter select-none">400</div>
+
+        <div class="border border-dashed border-mauve-400 px-4 py-1 text-xs tracking-widest opacity-60">
+            bad request
+        </div>
+
+        <h1 class="text-xl font-semibold">url is required</h1>
+
+        <hr class="border-dashed border-mauve-400 opacity-30 w-10">
+
+        <p class="text-sm opacity-50 leading-relaxed">
+            the request body is missing a
+            <code class="border border-dashed border-mauve-400 px-1 opacity-80">url</code>
+            field.<br>
+            please provide a valid url to shorten.
+        </p>
+
+        <a href="/"
+            class="border border-mauve-400 px-4 py-1 text-sm bg-taupe-800 hover:cursor-pointer rounded-md mt-2">
+            ← go back
+        </a>
+    </div>
+</body>
+
+</html>
