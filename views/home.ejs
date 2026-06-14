@@ -11,16 +11,21 @@
 <body class="font-mono bg-taupe-950 flex flex-col items-center text-mauve-400">
     <nav class="flex flex-row absolute justify-between h-fit items-center border-dashed border-b w-full">
         <div class="text-5xl font-extrabold p-3">URL shortener</div>
-        <button  class="border px-2 mx-4 rounded-md hover:cursor-pointer bg-taupe-800">Profile</button>
+        <div class="flex items-center gap-4 mx-4">
+            <% if (locals.userName) { %>
+                <span class="text-mauve-400">Hi, <%= userName %></span>
+                <% } %>
+                    <button class="border px-2 rounded-md hover:cursor-pointer bg-taupe-800">Profile</button>
+        </div>
     </nav>
 
 
-<div class="text-xl p-4 mt-24 w-full flex flex-col gap-4 items-center">        
+    <div class="text-xl p-4 mt-24 w-full flex flex-col gap-4 items-center">
         <form class="flex flex-col gap-4 items-center" method="POST" action="/url">
             <div class="flex">
                 <div>Enter the original URL:</div>
                 <input class="border-mauve-400 border rounded-sm px-2" type="text" name="url"
-                    placeholder="htpp://example.com">
+                    placeholder="https://example.com">
             </div>
             <div>
                 <button type="submit" class="border px-2 rounded-md hover:cursor-pointer bg-taupe-800">Generate short
@@ -35,54 +40,51 @@
                         https://localhost:7000/url/<%= object.shortId %>
                     </a>
                 </p>
-                <div class="inline-block"> Redirect URL:<%= object.redirectUrl %></div>
+                <div class="inline-block"> Redirect URL:<%= object.redirectUrl %>
+                </div>
             </div>
-        <% } 
-    %>
-    <% if (locals.urls && urls.length > 0) { %>
-<div class="w-full max-w-6xl mt-8">
-    <table class="w-full border border-mauve-400 text-center">
-        <thead>
-            <tr class="border-b border-mauve-400 bg-taupe-800">
-                <th class="p-2">S.No</th>
-                <th class="p-2">Short ID</th>
-                <th class="p-2">Redirect URL</th>
-                <th class="p-2">Clicks</th>
-            </tr>
-        </thead>
+            <% } %>
+                <% if (locals.urls && urls.length> 0) { %>
+                    <div class="w-full max-w-6xl mt-8">
+                        <table class="w-full border border-mauve-400 text-center">
+                            <thead>
+                                <tr class="border-b border-mauve-400 bg-taupe-800">
+                                    <th class="p-2">S.No</th>
+                                    <th class="p-2">Short ID</th>
+                                    <th class="p-2">Redirect URL</th>
+                                    <th class="p-2">Clicks</th>
+                                </tr>
+                            </thead>
 
-        <tbody>
-            <% urls.forEach((url, index) => { %>
-                <tr class="border-b border-mauve-700">
-                    <td class="p-2">
-                        <%= index + 1 %>
-                    </td>
+                            <tbody>
+                                <% urls.forEach((url, index)=> { %>
+                                    <tr class="border-b border-mauve-700">
+                                        <td class="p-2">
+                                            <%= index + 1 %>
+                                        </td>
 
-                    <td class="p-2">
-                        <a
-                            href="/url/<%= url.shortId %>"
-                            class="text-blue-400 underline"
-                            target="_blank"
-                        >
-                            <%= url.shortId %>
-                        </a>
-                    </td>
+                                        <td class="p-2">
+                                            <a href="/url/<%= url.shortId %>" class="text-blue-400 underline"
+                                                target="_blank">
+                                                <%= url.shortId %>
+                                            </a>
+                                        </td>
 
-                    <td class="p-2 break-all">
-                        <%= url.redirectUrl %>
-                    </td>
+                                        <td class="p-2 break-all">
+                                            <%= url.redirectUrl %>
+                                        </td>
 
-                    <td class="p-2">
-                        <%= url.visitHistory.length %>
-                    </td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
-</div>
-<% } %>
+                                        <td class="p-2">
+                                            <%= url.visitHistory.length %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %>
     </div>
-    
+
 
 </body>
 

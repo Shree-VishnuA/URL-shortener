@@ -1,10 +1,15 @@
-const sessionIdToUserMap = new Map();
+const Map = require("../models/map");
 
-function mapUser(id,user){
-    sessionIdToUserMap.set(id,user);
+async function mapUser(id, user) {
+    const object = await Map.create({
+        sessionId: id,
+        email: user.email
+    })
+    return object;
 }
-function getUser(id){
-    return sessionIdToUserMap.get(id);
+async function getUser(id) {
+    const object = await Map.findOne({ sessionId: id });
+    return object;
 }
 module.exports = {
     mapUser,

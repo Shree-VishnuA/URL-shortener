@@ -7,6 +7,7 @@ async function renderHomePage(req,res) {
     const allURLs = await URL.find({createdBy: req.user._id});
     return res.render("home",{
         urls:allURLs,
+        userName: req.user.name,
     })
 }
 

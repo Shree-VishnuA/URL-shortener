@@ -55,6 +55,7 @@ async function handleServerSideRendering(req, res) {
   return res.render("home", {
     object,
     urls: allURLs,
+    userName: req.user.name,
   });
 }
 module.exports = {
